@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ader.stockperformanceapp.presentation.viewmodel.MainActivityViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchMonthWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:checked="@={viewModel.loaderMonthWeekLiveData}"
+            style="@style/ToggleStyle"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/switchMonthWeek"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            chartList="@{viewModel.chartListLiveData}"/>
+
+        <TextView
+            android:id="@+id/monthTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/switchMonthWeek"
+            app:layout_constraintEnd_toStartOf="@id/switchMonthWeek"
+            android:layout_marginEnd="16dp"
+            android:text="@string/month"/>
+
+        <TextView
+            android:id="@+id/weekTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/switchMonthWeek"
+            app:layout_constraintStart_toEndOf="@id/switchMonthWeek"
+            android:layout_marginStart="16dp"
+            android:text="@string/week"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/performanceChart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chartList"
+            android:layout_marginTop="16dp"
+            chartData="@{viewModel.stockPerformanceMonthLiveData}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
